@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -52,11 +51,45 @@
                 android:text="100 units"/>
         </RadioGroup>
 
+        <!-- Peptide Inputs -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Peptides"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Peptide -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peptide Weight"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:paddingEnd="8dp"
+                android:layout_marginBottom="8dp"
+                tools:ignore="RtlHardcoded,RtlSymmetry" />
+            <EditText
+                android:id="@+id/peptide1Amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:hint="Amount (mg)"/>
+        </LinearLayout>
+
         <!-- Diluent Input -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Diluent (Water) Quantity"
+            android:text="Bacteriostatic Water Quantity"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:layout_marginBottom="8dp"/>
@@ -69,83 +102,6 @@
             android:hint="Enter amount in mL or IU"
             android:layout_marginBottom="16dp"/>
 
-        <!-- Peptide Inputs -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Peptides"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginBottom="8dp"/>
-
-        <!-- Peptide 1 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
-
-            <EditText
-                android:id="@+id/peptide1Name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Peptide 1 name"/>
-
-            <EditText
-                android:id="@+id/peptide1Amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="numberDecimal"
-                android:hint="Amount (mg)"/>
-        </LinearLayout>
-
-        <!-- Peptide 2 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
-
-            <EditText
-                android:id="@+id/peptide2Name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Peptide 2 name"/>
-
-            <EditText
-                android:id="@+id/peptide2Amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="numberDecimal"
-                android:hint="Amount (mg)"/>
-        </LinearLayout>
-
-        <!-- Peptide 3 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
-
-            <EditText
-                android:id="@+id/peptide3Name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Peptide 3 name"/>
-
-            <EditText
-                android:id="@+id/peptide3Amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="numberDecimal"
-                android:hint="Amount (mg)"/>
-        </LinearLayout>
         <!-- Results Section -->
         <TextView
             android:id="@+id/resultsTitle"
