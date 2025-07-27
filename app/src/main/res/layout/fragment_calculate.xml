@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="32dp"
+        android:paddingTop="?attr/actionBarSize"
         android:paddingBottom="32dp">
 
         <!-- Syringe Volume Selection -->
@@ -20,6 +20,7 @@
             android:text="Syringe Volume"
             android:textSize="18sp"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
         <RadioGroup
@@ -59,6 +60,7 @@
             android:text="Peptides"
             android:textSize="18sp"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
         <!-- Peptide -->
@@ -87,22 +89,59 @@
         </LinearLayout>
 
         <!-- Diluent Input -->
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bacteriostatic Water Quantity"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bac Water Quantity"
             android:textSize="18sp"
             android:textColor="@color/black"
-            android:layout_marginBottom="8dp"/>
+            android:paddingEnd="8dp"
+            android:layout_marginBottom="8dp"
+            tools:ignore="RtlHardcoded,RtlSymmetry"/>
 
         <EditText
             android:id="@+id/diluentInput"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:hint="Enter volume in mL"
-            android:layout_marginBottom="16dp"/>
+            android:layout_weight="1"
+            android:inputType="numberSigned"
+            android:hint="Volume (mL)"/>
 
+        </LinearLayout>
+        <!-- Dosage Amount -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dosage Amount"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:paddingEnd="8dp"
+            android:layout_marginBottom="8dp"
+            tools:ignore="RtlHardcoded,RtlSymmetry"/>
+
+        <EditText
+            android:id="@+id/dosageInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="numberSigned"
+            android:hint="Quantity (mg)"
+            android:layout_marginBottom="8dp"/>
+
+
+        </LinearLayout>
         <!-- Results Section -->
         <TextView
             android:id="@+id/resultsTitle"
