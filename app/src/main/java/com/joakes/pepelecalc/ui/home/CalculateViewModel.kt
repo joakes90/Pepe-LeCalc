@@ -1,6 +1,5 @@
 package com.joakes.pepelecalc.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
@@ -10,5 +9,5 @@ class CalculateViewModel : ViewModel() {
         value = null
     }
 
-    val weight: LiveData<Int?> = _weight
+    var weight: MutableLiveData<Int?> = _weight
 }
