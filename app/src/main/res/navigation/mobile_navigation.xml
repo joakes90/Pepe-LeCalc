@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.joakes.pepelecalc.ui.home.HomeFragment"
+        android:name="com.joakes.pepelecalc.ui.home.CalculateFragment"
         android:label="@string/title_calculate"
         tools:layout="@layout/fragment_calculate" />
 

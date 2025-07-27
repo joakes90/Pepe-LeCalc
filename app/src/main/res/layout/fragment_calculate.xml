@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingTop="32dp"
         android:paddingBottom="32dp">
 
         <!-- Syringe Volume Selection -->
@@ -77,7 +78,7 @@
                 android:layout_marginBottom="8dp"
                 tools:ignore="RtlHardcoded,RtlSymmetry" />
             <EditText
-                android:id="@+id/peptide1Amount"
+                android:id="@+id/peptideWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -99,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:hint="Enter amount in mL or IU"
+            android:hint="Enter volume in mL"
             android:layout_marginBottom="16dp"/>
 
         <!-- Results Section -->

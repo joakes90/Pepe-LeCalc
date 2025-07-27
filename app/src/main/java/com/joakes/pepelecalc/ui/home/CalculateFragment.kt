@@ -1,13 +1,17 @@
 package com.joakes.pepelecalc.ui.home
 
 import android.os.Bundle
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.joakes.pepelecalc.databinding.FragmentCalculateBinding
 
-class HomeFragment : Fragment() {
+class CalculateFragment : Fragment() {
 
     private var _binding: FragmentCalculateBinding? = null
 
@@ -20,9 +24,18 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
+        val calculateViewModel = ViewModelProvider(this).get(CalculateViewModel::class.java)
         _binding = FragmentCalculateBinding.inflate(inflater, container, false)
+
         val root: View = binding.root
+
+        val weightEditText: EditText = binding.peptideWeight
+        weightEditText.addTextChangedListener(object: TextWatcher {
+
+        })
+        calculateViewModel.weight.observe(viewLifecycleOwner) {
+            weightEditText.setText(it?.toString())
+        }
 
         return root
     }
