@@ -14,13 +14,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.joakes.pepelecalc.R
 import com.joakes.pepelecalc.databinding.FragmentCalculateBinding
+import kotlin.math.roundToInt
 
 class CalculateFragment : Fragment() {
 
     private companion object {
-        const val TICK_WIDTH = 3 // 2dp
+        const val TICK_WIDTH = 3 // 3dp
         const val TICK_HEIGHT_MAJOR = 60 // 30dp
-        const val TICK_HEIGHT_MINOR = 30 // 15dp
+        const val TICK_HEIGHT_MINOR = 30     // 15dp
     }
     private var _binding: FragmentCalculateBinding? = null
 
@@ -42,7 +43,7 @@ class CalculateFragment : Fragment() {
         // Syringe Volume Selection
         val syringeVolumeGroup = binding.syringeVolumeGroup
         syringeVolumeGroup.setOnCheckedChangeListener { _, checkedId ->
-            val syringeVolume = when (checkedId) {
+            when (checkedId) {
                 R.id.volume30 -> calculateViewModel.syringeVolume.value = 30
                 R.id.volume50 -> calculateViewModel.syringeVolume.value = 50
                 R.id.volume100 -> calculateViewModel.syringeVolume.value = 100
@@ -51,7 +52,13 @@ class CalculateFragment : Fragment() {
                     calculateViewModel.syringeVolume.value = 100
                 }
             }
-            drawTickMarks(tickMarksContainer, calculateViewModel.syringeVolume.value ?: 100)
+            val maxUnits = when(calculateViewModel.syringeVolume.value) {
+                30 -> 30
+                50 -> 50
+                100 -> 50
+                else -> 50
+            }
+            drawTickMarks(tickMarksContainer, maxUnits)
         }
         // Peptide Weight Input
         val weightEditText: EditText = binding.peptideWeight
@@ -74,6 +81,7 @@ class CalculateFragment : Fragment() {
             weightEditText.setText(it?.toString())
         }
 
+        drawTickMarks(tickMarksContainer, 30)
         return root
     }
 
@@ -85,7 +93,6 @@ class CalculateFragment : Fragment() {
     private fun drawTickMarks(tickMarksContainer: LinearLayout, maxUnits: Int) {
         tickMarksContainer.removeAllViews()
         val majorInterval = 5
-        val minorInterval = 1
 
         tickMarksContainer.post {
             val containerWidth = tickMarksContainer.width
@@ -93,7 +100,7 @@ class CalculateFragment : Fragment() {
 
             val totalTickWidth = totalTicks * TICK_WIDTH
             val availableSpace = containerWidth - totalTickWidth
-            val spaceBetweenTicks = availableSpace / maxUnits.toFloat()
+            val spaceBetweenTicks = (availableSpace.toFloat() / maxUnits.toFloat()).roundToInt()
 
             for (unit in 0..maxUnits) {
                 val isMajor = unit % majorInterval == 0
@@ -109,7 +116,7 @@ class CalculateFragment : Fragment() {
 
     private fun createTickMark(
         isMajor: Boolean,
-        spaceBetweenTicks: Float,
+        spaceBetweenTicks: Int,
         isFirst: Boolean
     ): View {
         return View(requireContext()).apply {
@@ -118,7 +125,7 @@ class CalculateFragment : Fragment() {
                 if (isMajor) TICK_HEIGHT_MAJOR else TICK_HEIGHT_MINOR
             ).apply {
                 if (!isFirst) {
-                    marginStart = spaceBetweenTicks.toInt()
+                    marginStart = spaceBetweenTicks
                 }
             }
             setBackgroundColor(if (isMajor) Color.BLACK else Color.GRAY)

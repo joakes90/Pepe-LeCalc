@@ -9,7 +9,7 @@ class CalculateViewModel : ViewModel() {
         value = null
     }
     private val _syringeVolume = MutableLiveData<Int>().apply {
-        value = 30
+        value = 100
     }
 
     var weight: MutableLiveData<Int?> = _weight
