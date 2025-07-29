@@ -212,7 +212,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/syringeBody"
                 app:layout_constraintTop_toTopOf="@+id/syringeBody"
                 app:layout_constraintBottom_toBottomOf="@+id/syringeBody">
-                <!-- Tick marks will be added programmatically -->
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
