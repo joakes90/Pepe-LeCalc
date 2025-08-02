@@ -1,6 +1,5 @@
 package com.joakes.pepelecalc.ui.home
 
-import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -34,7 +33,7 @@ class CalculateFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val calculateViewModel = ViewModelProvider(this).get(CalculateViewModel::class.java)
+        val calculateViewModel = ViewModelProvider(this)[CalculateViewModel::class.java]
         _binding = FragmentCalculateBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
@@ -52,37 +51,60 @@ class CalculateFragment : Fragment() {
                     calculateViewModel.syringeVolume.value = 100
                 }
             }
-            val maxUnits = when(calculateViewModel.syringeVolume.value) {
-                30 -> 30
-                50 -> 50
-                100 -> 50
-                else -> 50
-            }
+            val maxUnits = calculateViewModel.syringeVolume.value ?: 100
             drawTickMarks(tickMarksContainer, maxUnits)
         }
         // Peptide Weight Input
-        val weightEditText: EditText = binding.peptideWeight
-        val textWatcher = object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val newWeight = s?.toString()?.toIntOrNull()
-                val currentViewModelValue = calculateViewModel.weight.value
-                if (newWeight != currentViewModelValue) {
-                    calculateViewModel.weight.value = newWeight
-                }
-
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
-        }
-        weightEditText.addTextChangedListener(textWatcher)
+        val weightEditText: EditText = binding.peptideWeightInput
+        val weightTextWatcher = createWatcher(calculateViewModel, weightEditText)
+        weightEditText.addTextChangedListener(weightTextWatcher)
         calculateViewModel.weight.observe(viewLifecycleOwner) {
-            weightEditText.setText(it?.toString())
+            // TODO: calculate dosage if possible
+        }
+
+        // Dilutant Volume Input
+        val dilutionEditText: EditText = binding.diluentInput
+        val dilutionTextWatcher = createWatcher(calculateViewModel, dilutionEditText)
+        dilutionEditText.addTextChangedListener(dilutionTextWatcher)
+        calculateViewModel.dilutantVolume.observe(viewLifecycleOwner) {
+            // TODO: calculate dosage if possible
+        }
+
+        // Desired Dosage Input
+        val dosageEditText: EditText = binding.dosageInput
+        val dosageTextWatcher = createWatcher(calculateViewModel, dosageEditText)
+        dosageEditText.addTextChangedListener(dosageTextWatcher)
+        calculateViewModel.dosage.observe(viewLifecycleOwner) {
+            // TODO: calculate dosage if possible
         }
 
         drawTickMarks(tickMarksContainer, 30)
         return root
+    }
+
+    private fun createWatcher(calculateViewModel: CalculateViewModel, field: EditText): TextWatcher {
+        val weightTextWatcher = object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val newWeight = s?.toString()?.toIntOrNull()
+                val currentViewModelValue = when(field) {
+                    binding.peptideWeightInput -> calculateViewModel.weight.value
+                    binding.diluentInput -> calculateViewModel.dilutantVolume.value
+                    else -> 0
+                }
+                if (newWeight != currentViewModelValue) {
+                    when(field) {
+                        binding.peptideWeightInput -> calculateViewModel.weight.value = newWeight
+                        binding.diluentInput -> calculateViewModel.dilutantVolume.value = newWeight
+                    }
+                }
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        }
+        return weightTextWatcher
     }
 
     override fun onDestroyView() {

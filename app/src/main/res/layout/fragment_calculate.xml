@@ -81,7 +81,7 @@
                 android:layout_marginBottom="8dp"
                 tools:ignore="RtlHardcoded,RtlSymmetry" />
             <EditText
-                android:id="@+id/peptideWeight"
+                android:id="@+id/peptideWeightInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
