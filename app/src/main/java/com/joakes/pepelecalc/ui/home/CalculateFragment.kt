@@ -58,7 +58,7 @@ class CalculateFragment : Fragment() {
         val weightEditText: EditText = binding.peptideWeightInput
         val weightTextWatcher = createWatcher(calculateViewModel, weightEditText)
         weightEditText.addTextChangedListener(weightTextWatcher)
-        calculateViewModel.weight.observe(viewLifecycleOwner) {
+        calculateViewModel.peptideWeight.observe(viewLifecycleOwner) {
             // TODO: calculate dosage if possible
         }
 
@@ -83,18 +83,19 @@ class CalculateFragment : Fragment() {
     }
 
     private fun createWatcher(calculateViewModel: CalculateViewModel, field: EditText): TextWatcher {
-        val weightTextWatcher = object : TextWatcher {
+        val textWatcher = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                val newWeight = s?.toString()?.toIntOrNull()
+                val newValue = s?.toString()?.toIntOrNull()
                 val currentViewModelValue = when(field) {
-                    binding.peptideWeightInput -> calculateViewModel.weight.value
+                    binding.peptideWeightInput -> calculateViewModel.peptideWeight.value
                     binding.diluentInput -> calculateViewModel.dilutantVolume.value
                     else -> 0
                 }
-                if (newWeight != currentViewModelValue) {
+                if (newValue != currentViewModelValue) {
+                    println("calculated units = ${calculateViewModel.calculatedUnits.value}")
                     when(field) {
-                        binding.peptideWeightInput -> calculateViewModel.weight.value = newWeight
-                        binding.diluentInput -> calculateViewModel.dilutantVolume.value = newWeight
+                        binding.peptideWeightInput -> calculateViewModel.peptideWeight.value = newValue
+                        binding.diluentInput -> calculateViewModel.dilutantVolume.value = newValue
                     }
                 }
 
@@ -104,7 +105,7 @@ class CalculateFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         }
-        return weightTextWatcher
+        return textWatcher
     }
 
     override fun onDestroyView() {
