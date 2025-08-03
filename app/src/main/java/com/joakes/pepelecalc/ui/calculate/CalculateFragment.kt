@@ -1,4 +1,4 @@
-package com.joakes.pepelecalc.ui.home
+package com.joakes.pepelecalc.ui.calculate
 
 import android.graphics.Color
 import android.os.Bundle
