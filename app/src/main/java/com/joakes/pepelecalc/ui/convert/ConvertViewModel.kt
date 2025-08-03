@@ -1,10 +1,10 @@
-package com.joakes.pepelecalc.ui.dashboard
+package com.joakes.pepelecalc.ui.convert
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class ConvertViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"

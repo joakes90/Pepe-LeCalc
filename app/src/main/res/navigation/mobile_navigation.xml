@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_calculate">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_calculate"
         android:name="com.joakes.pepelecalc.ui.calculate.CalculateFragment"
         android:label="@string/title_calculate"
         tools:layout="@layout/fragment_calculate" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.joakes.pepelecalc.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_convert"
+        android:name="com.joakes.pepelecalc.ui.convert.ConvertFragment"
+        android:label="@string/title_convert"
+        tools:layout="@layout/fragment_convert" />
 </navigation>

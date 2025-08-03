@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Pepe LeCalc</string>
     <string name="title_calculate">Calculate</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_convert">Convert</string>
 </resources>
