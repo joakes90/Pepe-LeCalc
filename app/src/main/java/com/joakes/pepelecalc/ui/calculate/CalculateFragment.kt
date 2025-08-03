@@ -73,8 +73,11 @@ class CalculateFragment : Fragment() {
         dosageEditText.addTextChangedListener(dosageTextWatcher)
 
         calculateViewModel.calculatedUnits.observe(viewLifecycleOwner) {
-            println("calculated units = $it")
-            //TODO: update UI
+            it?.let { units ->
+                val unitWidth = (tickMarksContainer.width / (calculateViewModel.syringeVolume.value ?: 100)) + (TICK_WIDTH/2)
+                binding.syringeFill.layoutParams.width = (units * unitWidth)
+                binding.syringeFill.requestLayout()
+            }
         }
 
         // Update Measurement Text
