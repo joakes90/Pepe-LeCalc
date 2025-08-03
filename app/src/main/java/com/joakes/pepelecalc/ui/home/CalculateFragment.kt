@@ -54,28 +54,32 @@ class CalculateFragment : Fragment() {
             val maxUnits = calculateViewModel.syringeVolume.value ?: 100
             drawTickMarks(tickMarksContainer, maxUnits)
         }
+
         // Peptide Weight Input
         val weightEditText: EditText = binding.peptideWeightInput
         val weightTextWatcher = createWatcher(calculateViewModel, weightEditText)
         weightEditText.addTextChangedListener(weightTextWatcher)
         calculateViewModel.peptideWeight.observe(viewLifecycleOwner) {
-            // TODO: calculate dosage if possible
         }
 
         // Dilutant Volume Input
         val dilutionEditText: EditText = binding.diluentInput
         val dilutionTextWatcher = createWatcher(calculateViewModel, dilutionEditText)
         dilutionEditText.addTextChangedListener(dilutionTextWatcher)
-        calculateViewModel.dilutantVolume.observe(viewLifecycleOwner) {
-            // TODO: calculate dosage if possible
-        }
 
         // Desired Dosage Input
         val dosageEditText: EditText = binding.dosageInput
         val dosageTextWatcher = createWatcher(calculateViewModel, dosageEditText)
         dosageEditText.addTextChangedListener(dosageTextWatcher)
-        calculateViewModel.dosage.observe(viewLifecycleOwner) {
-            // TODO: calculate dosage if possible
+
+        calculateViewModel.calculatedUnits.observe(viewLifecycleOwner) {
+            println("calculated units = $it")
+            //TODO: update UI
+        }
+
+        // Update Measurement Text
+        calculateViewModel.calculatedUnitsString.observe(viewLifecycleOwner) {
+            binding.measurementText.text = it
         }
 
         drawTickMarks(tickMarksContainer, 30)
@@ -85,17 +89,20 @@ class CalculateFragment : Fragment() {
     private fun createWatcher(calculateViewModel: CalculateViewModel, field: EditText): TextWatcher {
         val textWatcher = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                val newValue = s?.toString()?.toIntOrNull()
+                val newValue = s?.toString()?.toFloatOrNull()
                 val currentViewModelValue = when(field) {
                     binding.peptideWeightInput -> calculateViewModel.peptideWeight.value
                     binding.diluentInput -> calculateViewModel.dilutantVolume.value
+                    binding.dosageInput -> calculateViewModel.dosage.value
                     else -> 0
                 }
                 if (newValue != currentViewModelValue) {
                     println("calculated units = ${calculateViewModel.calculatedUnits.value}")
                     when(field) {
-                        binding.peptideWeightInput -> calculateViewModel.peptideWeight.value = newValue
-                        binding.diluentInput -> calculateViewModel.dilutantVolume.value = newValue
+                        binding.peptideWeightInput -> calculateViewModel.updatePeptideWeight(newValue)
+                        binding.diluentInput -> calculateViewModel.updateDilutantVolume(newValue)
+                        binding.dosageInput -> calculateViewModel.updateDosage(newValue)
+                        else -> {}
                     }
                 }
 

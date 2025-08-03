@@ -10,15 +10,15 @@ class CalculateViewModel : ViewModel() {
         value = 100
     }
 
-    private val _peptideWeight = MutableLiveData<Int?>().apply {
+    private val _peptideWeight = MutableLiveData<Float?>().apply {
         value = null
     }
 
-    private val _dilutantVolume = MutableLiveData<Int?>().apply {
+    private val _dilutantVolume = MutableLiveData<Float?>().apply {
         value = null
     }
 
-    private val _dosage = MutableLiveData<Int?>().apply {
+    private val _dosage = MutableLiveData<Float?>().apply {
         value = null
     }
 
@@ -30,9 +30,10 @@ class CalculateViewModel : ViewModel() {
             val dose = _dosage.value
 
             // Ensure all values are present and vol/weight are not zero to avoid errors
-            if (weight != null && weight != 0 && vol != null && vol != 0 && dose != null) {
-                // Consider using floating point numbers for precision if needed
-                value = ((dose.toDouble() / vol.toDouble()) / weight.toDouble() * vol.toDouble()).toInt()
+            if (weight != null && weight != 0.toFloat() && vol != null && vol != 0.toFloat() && dose != null) {
+                val concentration = weight / vol
+                value =
+                    ((dose / concentration) * 100).toInt()
             } else {
                 value = null // Or some default error/placeholder value
             }
@@ -42,21 +43,39 @@ class CalculateViewModel : ViewModel() {
         addSource(_peptideWeight) { calculate() }
         addSource(_dilutantVolume) { calculate() }
         addSource(_dosage) { calculate() }
+        addSource(_syringeVolume) { calculate() }
     }
 
-    private val _calculatedUnitsString: MediatorLiveData<String> = MediatorLiveData<String>().apply {
-        fun generateString() {
-            val units = _calculatedUnits.value
-            value = if (units != null) { "Draw $units" } else { "" }
+    private val _calculatedUnitsString: MediatorLiveData<String> =
+        MediatorLiveData<String>().apply {
+            fun generateString() {
+                val units = _calculatedUnits.value
+                value = if (units != null) { "Draw $units units" } else { "" }
+            }
+
+            addSource(_calculatedUnits) { generateString() }
         }
-        addSource(_calculatedUnits) { generateString() }
+
+        var syringeVolume: MutableLiveData<Int> = _syringeVolume
+        var peptideWeight: MutableLiveData<Float?> = _peptideWeight
+        var dilutantVolume: MutableLiveData<Float?> = _dilutantVolume
+        var dosage: MutableLiveData<Float?> = _dosage
+        var calculatedUnits: MediatorLiveData<Int?> = _calculatedUnits
+        var calculatedUnitsString: MediatorLiveData<String> = _calculatedUnitsString
+
+        fun updateSyringeVolume(newVolume: Int) {
+            _syringeVolume.value = newVolume
+        }
+
+        fun updatePeptideWeight(newWeight: Float?) {
+            _peptideWeight.value = newWeight
+        }
+
+        fun updateDilutantVolume(newVolume: Float?) {
+            _dilutantVolume.value = newVolume
+        }
+
+        fun updateDosage(newDosage: Float?) {
+            _dosage.value = newDosage
+        }
     }
-
-    var syringeVolume: MutableLiveData<Int> = _syringeVolume
-    var peptideWeight: MutableLiveData<Int?> = _peptideWeight
-    var dilutantVolume: MutableLiveData<Int?> = _dilutantVolume
-    var dosage: MutableLiveData<Int?> = _dosage
-    var calculatedUnits: MutableLiveData<Int?> = _calculatedUnits
-
-    var calculcularUnitsString: MutableLiveData<String> = _calculatedUnitsString
-}

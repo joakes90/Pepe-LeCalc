@@ -111,7 +111,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:inputType="numberSigned"
+            android:inputType="numberDecimal"
             android:hint="Volume (mL)"/>
 
         </LinearLayout>
@@ -137,7 +137,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:inputType="numberSigned"
+            android:inputType="numberDecimal"
             android:hint="Quantity (mg)"
             android:layout_marginBottom="8dp"/>
 
@@ -163,7 +163,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textColor="@color/black"
-            android:text="Take your drugs you fat ass"
             android:textSize="16sp" />
 
         <!-- Syringe Visualization -->
