@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Syringe Volume"
+            android:text="@string/text_syringe_volume"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -36,7 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="30 units"
+                android:text="@string/text_30_units"
                 android:checked="true"/>
 
             <RadioButton
@@ -44,21 +44,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="50 units"/>
+                android:text="@string/text_50_units"/>
 
             <RadioButton
                 android:id="@+id/volume100"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="100 units"/>
+                android:text="@string/text_100_units"/>
         </RadioGroup>
 
         <!-- Peptide Inputs -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Peptides"
+            android:text="@string/text_peptides"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -74,7 +74,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Peptide Weight"
+                android:text="@string/text_peptide_weight"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:paddingEnd="8dp"
@@ -99,7 +99,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bac Water Quantity"
+            android:text="@string/text_bac_water_quantity"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:paddingEnd="8dp"
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:inputType="numberDecimal"
-            android:hint="Volume (mL)"/>
+            android:hint="@string/text_volume_ml"/>
 
         </LinearLayout>
         <!-- Dosage Amount -->
@@ -125,7 +125,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dosage Amount"
+            android:text="@string/text_dosage_amount"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:paddingEnd="8dp"
@@ -138,7 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:inputType="numberDecimal"
-            android:hint="Quantity (mg)"
+            android:hint="@string/text_quantity_mg"
             android:layout_marginBottom="8dp"/>
 
 
@@ -149,7 +149,7 @@
             android:id="@+id/resultsTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dosage Measurement"
+            android:text="@string/text_dosage_measurement"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/black"

@@ -2,4 +2,24 @@
     <string name="app_name">Pepe LeCalc</string>
     <string name="title_calculate">Calculate</string>
     <string name="title_convert">Convert</string>
+    <string name="text_syringe_volume">Syringe Volume</string>
+    <string name="text_30_units">30 units</string>
+    <string name="text_50_units">50 units</string>
+    <string name="text_100_units">100 units</string>
+    <string name="text_peptides">Peptides</string>
+    <string name="text_peptide_weight">Peptide Weight</string>
+    <string name="text_bac_water_quantity">Bac Water Quantity</string>
+    <string name="text_volume_ml">Volume (mL)</string>
+    <string name="text_dosage_amount">Dosage Amount</string>
+    <string name="text_quantity_mg">Quantity (mg)</string>
+    <string name="text_dosage_measurement">Dosage Measurement</string>
+    <string name="text_unit_conversion">Unit Conversion</string>
+    <string name="text_millilitres_ml">Millilitres(mL)</string>
+    <string name="text_ml">mL</string>
+    <string name="text_milligrams_mg">Milligrams(mg)</string>
+    <string name="text_mg">mg</string>
+    <string name="text_microlitres_ul">Microlitres(uL)</string>
+    <string name="text_ul">uL</string>
+    <string name="text_micrograms_mcg">Micrograms(mcg)</string>
+    <string name="text_mcg">mcg</string>
 </resources>
