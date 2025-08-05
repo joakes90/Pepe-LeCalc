@@ -10,48 +10,64 @@ class ConvertViewModel : ViewModel() {
 
     // This is just mg
     private val _trueValue = MutableLiveData<Double?>().apply {
-        value = 5.0
+        value = null
     }
     private val decimalFragment = DecimalFormat("#.####")
-    private val _millilitres = MediatorLiveData<String>().apply {
+    private val _millilitres = MediatorLiveData<String?>().apply {
         fun update() {
-            _trueValue.value?.let { newValue ->
-                value = decimalFragment.format (newValue * 0.001).toString()
+            if (_trueValue.value == null) {
+                value = ""
+            } else {
+                _trueValue.value?.let { newValue ->
+                    value = decimalFragment.format (newValue * 0.001).toString()
+                }
             }
         }
         addSource(_trueValue) { update() }
     }
 
-    private val _milligrams = MediatorLiveData<String>().apply {
+    private val _milligrams = MediatorLiveData<String?>().apply {
         fun update() {
-            _trueValue.value?.let { newValue ->
-                value = decimalFragment.format(newValue).toString()
+            if (_trueValue.value == null) {
+                value = ""
+            } else {
+                _trueValue.value?.let { newValue ->
+                    value = decimalFragment.format(newValue).toString()
+                }
             }
         }
         addSource(_trueValue) { update() }
     }
 
-    private val _microlitres = MediatorLiveData<String>().apply {
+    private val _microlitres = MediatorLiveData<String?>().apply {
         fun update() {
-            _trueValue.value?.let { newValue ->
-                value = decimalFragment.format(newValue).toString()
+            if (_trueValue.value == null) {
+                value = ""
+            } else {
+                _trueValue.value?.let { newValue ->
+                    value = decimalFragment.format(newValue).toString()
+                }
             }
         }
         addSource(_trueValue) { update() }
     }
-    private val _micrograms = MediatorLiveData<String>().apply {
+    private val _micrograms = MediatorLiveData<String?>().apply {
         fun update() {
-            _trueValue.value?.let { newValue ->
-                value = decimalFragment.format(newValue * 1000).toString()
+            if (_trueValue.value == null) {
+                value = ""
+            } else {
+                _trueValue.value?.let { newValue ->
+                    value = decimalFragment.format(newValue * 1000).toString()
+                }
             }
         }
         addSource(_trueValue) { update() }
     }
 
-    val millilitres: LiveData<String> = _millilitres
-    val milligrams: LiveData<String> = _milligrams
-    val microlitres: LiveData<String> = _microlitres
-    val micrograms: LiveData<String> = _micrograms
+    val millilitres: LiveData<String?> = _millilitres
+    val milligrams: LiveData<String?> = _milligrams
+    val microlitres: LiveData<String?> = _microlitres
+    val micrograms: LiveData<String?> = _micrograms
 
     fun setTrueValue(value: Double?) {
         val oldValue = _trueValue.value
