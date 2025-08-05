@@ -68,20 +68,20 @@ class ConvertFragment : Fragment() {
                 when (editText) {
                     binding.millilitresInput -> {
                         val newValue = input?.times(1000)
-                        viewModel.setTrueValue(newValue)
+                        viewModel.setTrueValue(newValue, MeasurementType.MILLILITRES)
                     }
 
                     binding.milligramsInput -> {
-                        viewModel.setTrueValue(input)
+                        viewModel.setTrueValue(input, MeasurementType.MILLIGRAMS)
                     }
 
                     binding.microlitresInput -> {
-                        viewModel.setTrueValue(input)
+                        viewModel.setTrueValue(input, MeasurementType.MICROLITRES)
                     }
 
                     binding.microgramsInput -> {
                         val newValue = input?.times(0.001)
-                        viewModel.setTrueValue(newValue)
+                        viewModel.setTrueValue(newValue, MeasurementType.MICROGRAMS)
                     }
                 }
             }
