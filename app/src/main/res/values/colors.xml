@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="text_color">#000000</color>
     <color name="background_color">#FFFFFF</color>
+    <color name="tick_color">#5D5757</color>
+    <color name="tick_major_color">#000000</color>
+    <color name="syringe_color">#000000</color>
 </resources>

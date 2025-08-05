@@ -1,5 +1,6 @@
 package com.joakes.pepelecalc.ui.calculate
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.joakes.pepelecalc.R
@@ -159,7 +161,11 @@ class CalculateFragment : Fragment() {
                     marginStart = spaceBetweenTicks
                 }
             }
-            setBackgroundColor(if (isMajor) Color.BLACK else Color.GRAY)
+            setBackgroundColor( if (isMajor) {
+                ContextCompat.getColor(requireContext(), R.color.tick_major_color)
+            } else {
+                ContextCompat.getColor(requireContext(), R.color.tick_color)
+            })
         }
     }
 }
