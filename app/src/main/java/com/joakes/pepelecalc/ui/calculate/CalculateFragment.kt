@@ -35,8 +35,10 @@ class CalculateFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val calculateViewModel = ViewModelProvider(this)[CalculateViewModel::class.java]
         _binding = FragmentCalculateBinding.inflate(inflater, container, false)
+
+        val calculateViewModel =
+            ViewModelProvider(this).get(CalculateViewModel::class.java)
 
         val root: View = binding.root
         val tickMarksContainer = binding.tickMarksContainer
@@ -54,7 +56,7 @@ class CalculateFragment : Fragment() {
                 }
             }
             val maxUnits = calculateViewModel.syringeVolume.value ?: 100
-            drawTickMarks(tickMarksContainer, maxUnits)
+                drawTickMarks(tickMarksContainer, maxUnits)
         }
 
         // Peptide Weight Input
@@ -87,6 +89,16 @@ class CalculateFragment : Fragment() {
 
         drawTickMarks(tickMarksContainer, calculateViewModel.syringeVolume.value ?: 100)
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val calculateViewModel =
+            ViewModelProvider(this).get(CalculateViewModel::class.java)
+        calculateViewModel.reset()
+        binding.peptideWeightInput.setText("")
+        binding.diluentInput.setText("")
+        binding.dosageInput.setText("")
     }
 
     private fun createWatcher(calculateViewModel: CalculateViewModel, field: EditText): TextWatcher {

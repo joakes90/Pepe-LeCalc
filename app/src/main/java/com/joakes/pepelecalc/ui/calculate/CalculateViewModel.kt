@@ -63,8 +63,10 @@ class CalculateViewModel : ViewModel() {
         var calculatedUnits: MediatorLiveData<Int?> = _calculatedUnits
         var calculatedUnitsString: MediatorLiveData<String> = _calculatedUnitsString
 
-        fun updateSyringeVolume(newVolume: Int) {
-            _syringeVolume.value = newVolume
+        fun reset() {
+            _peptideWeight.value = null
+            _dilutantVolume.value = null
+            _dosage.value = null
         }
 
         fun updatePeptideWeight(newWeight: Float?) {
