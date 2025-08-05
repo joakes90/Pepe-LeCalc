@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        android:background="@color/white">
+        android:background="@color/background_color">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_unit_conversion"
                 android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp"/>
 
@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/text_millilitres_ml"
                     android:textSize="18sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_color"
                     android:paddingEnd="8dp"
                     android:layout_marginBottom="8dp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/text_milligrams_mg"
                     android:textSize="18sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_color"
                     android:paddingEnd="8dp"
                     android:layout_marginBottom="8dp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/text_microlitres_ul"
                     android:textSize="18sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_color"
                     android:paddingEnd="8dp"
                     android:layout_marginBottom="8dp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/text_micrograms_mcg"
                     android:textSize="18sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_color"
                     android:paddingEnd="8dp"
                     android:layout_marginBottom="8dp"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
