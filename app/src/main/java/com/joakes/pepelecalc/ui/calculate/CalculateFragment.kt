@@ -85,7 +85,7 @@ class CalculateFragment : Fragment() {
             binding.measurementText.text = it
         }
 
-        drawTickMarks(tickMarksContainer, 30)
+        drawTickMarks(tickMarksContainer, calculateViewModel.syringeVolume.value ?: 100)
         return root
     }
 

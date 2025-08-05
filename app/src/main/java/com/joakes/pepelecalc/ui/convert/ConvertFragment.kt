@@ -1,6 +1,8 @@
 package com.joakes.pepelecalc.ui.convert
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,28 +35,61 @@ class ConvertFragment : Fragment() {
         convertViewModel.millilitres.observe(viewLifecycleOwner) {
             millilitres.setText(it.toString())
         }
+        millilitres.addTextChangedListener(createTextWatcher(millilitres, convertViewModel))
 
 //        Milligrams input
         val milligrams: EditText = binding.milligramsInput
         convertViewModel.milligrams.observe(viewLifecycleOwner) {
             milligrams.setText(it.toString())
         }
+        milligrams.addTextChangedListener(createTextWatcher(milligrams, convertViewModel))
 
 //        Microlitres input
         val microlitres: EditText = binding.microlitresInput
         convertViewModel.microlitres.observe(viewLifecycleOwner) {
             microlitres.setText(it.toString())
         }
+        microlitres.addTextChangedListener(createTextWatcher(microlitres, convertViewModel))
 
 //        Micrograms input
         val micrograms: EditText = binding.microgramsInput
         convertViewModel.micrograms.observe(viewLifecycleOwner) {
             micrograms.setText(it.toString())
         }
+        micrograms.addTextChangedListener(createTextWatcher(micrograms, convertViewModel))
 
         return root
     }
 
+    private fun createTextWatcher(editText: EditText, viewModel: ConvertViewModel): TextWatcher {
+        val textWatcher = object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val input = s.toString().toDoubleOrNull()
+                when (editText) {
+                    binding.millilitresInput -> {
+                        val newValue = input?.times(1000)
+                        viewModel.setTrueValue(newValue)
+                    }
+
+                    binding.milligramsInput -> {
+                        viewModel.setTrueValue(input)
+                    }
+
+                    binding.microlitresInput -> {
+                        viewModel.setTrueValue(input)
+                    }
+
+                    binding.microgramsInput -> {
+                        val newValue = input?.times(0.001)
+                        viewModel.setTrueValue(newValue)
+                    }
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        }
+        return textWatcher
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -2,27 +2,50 @@ package com.joakes.pepelecalc.ui.convert
 
 import android.icu.text.DecimalFormat
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ConvertViewModel : ViewModel() {
 
     // This is just mg
-    private var _trueValue = 2.5
+    private val _trueValue = MutableLiveData<Double?>().apply {
+        value = 5.0
+    }
     private val decimalFragment = DecimalFormat("#.####")
-    private val _millilitres = MutableLiveData<String>().apply {
-        value = decimalFragment.format (_trueValue * 0.001).toString()
+    private val _millilitres = MediatorLiveData<String>().apply {
+        fun update() {
+            _trueValue.value?.let { newValue ->
+                value = decimalFragment.format (newValue * 0.001).toString()
+            }
+        }
+        addSource(_trueValue) { update() }
     }
 
-    private val _milligrams = MutableLiveData<String>().apply {
-        value = decimalFragment.format(_trueValue).toString()
+    private val _milligrams = MediatorLiveData<String>().apply {
+        fun update() {
+            _trueValue.value?.let { newValue ->
+                value = decimalFragment.format(newValue).toString()
+            }
+        }
+        addSource(_trueValue) { update() }
     }
 
-    private val _microlitres = MutableLiveData<String>().apply {
-        value = decimalFragment.format(_trueValue).toString()
+    private val _microlitres = MediatorLiveData<String>().apply {
+        fun update() {
+            _trueValue.value?.let { newValue ->
+                value = decimalFragment.format(newValue).toString()
+            }
+        }
+        addSource(_trueValue) { update() }
     }
-    private val _micrograms = MutableLiveData<String>().apply {
-        value = decimalFragment.format(_trueValue * 1000).toString()
+    private val _micrograms = MediatorLiveData<String>().apply {
+        fun update() {
+            _trueValue.value?.let { newValue ->
+                value = decimalFragment.format(newValue * 1000).toString()
+            }
+        }
+        addSource(_trueValue) { update() }
     }
 
     val millilitres: LiveData<String> = _millilitres
@@ -30,4 +53,10 @@ class ConvertViewModel : ViewModel() {
     val microlitres: LiveData<String> = _microlitres
     val micrograms: LiveData<String> = _micrograms
 
+    fun setTrueValue(value: Double?) {
+        val oldValue = _trueValue.value
+        if (oldValue != value) {
+            _trueValue.value = value
+        }
+    }
 }
